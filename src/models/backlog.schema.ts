@@ -1,14 +1,14 @@
 import { Schema, Types, model } from 'mongoose';
 
-import { BacklogModel } from '../interfaces/backlog.interface'
+import { BacklogsModel } from '../interfaces/backlog.interface'
 
-const backlogSchema = new Schema<BacklogModel>(
+const backlogSchema = new Schema<BacklogsModel>(
   {
     title: {
       type: String,
       required: [true, "title is required"]
     },
-    sprint: {
+    sprints: {
       type: [Types.ObjectId],
       ref: "Sprint",
       default: [],
@@ -23,6 +23,11 @@ const backlogSchema = new Schema<BacklogModel>(
       default: Date.now(),
       required: true,
     },
+    owner: {
+      type: Types.ObjectId,
+      ref: "User",
+      required: [true, "owner is required"],
+    }
   },
   {
     versionKey: false,

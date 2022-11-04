@@ -10,8 +10,6 @@ import {
 
 import { checkAuthenticated } from "../middleware/authenticated";
 
-import { islogout } from '../middleware/islogout';
-
 const router = Router();
 
 router.post("/signup", registerUser);

@@ -1,8 +1,9 @@
 import { ObjectId } from "mongoose";
 
-export interface BacklogModel {
+export interface BacklogsModel {
     title: string;
-    sprint: ObjectId[];
+    sprints: ObjectId[];
     incidences: ObjectId[];
     created_at: Date;
+    owner: ObjectId;
 }
