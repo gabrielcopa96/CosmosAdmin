@@ -2,7 +2,14 @@ import { Request, Response, NextFunction } from "express";
 
 import { signup } from "../services/auth.service";
 
-const registerUser = async ({ body }: Request, res: Response) => {
+import { OutPutResponseRegister } from '../interfaces/users.interface';
+
+interface Error {
+  ok: boolean;
+  msg: string;
+}
+
+const registerUser = async ({ body }: Request, res: Response): Promise<any | Error | OutPutResponseRegister> => {
   try {
     const newUser = await signup(body);
 
@@ -14,6 +21,7 @@ const registerUser = async ({ body }: Request, res: Response) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
+      ok: false,
       msg: "Try again",
     });
   }
@@ -29,6 +37,7 @@ const loginUser = (req: Request, res: Response) => {
       msg: "User logueado correctamente",
       userAuth: user
     });
+    
   } catch (error) {
     res.status(500).json({
       ok: false,

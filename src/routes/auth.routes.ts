@@ -12,16 +12,16 @@ import { checkAuthenticated } from "../middleware/authenticated";
 
 const router = Router();
 
-router.post("/signup", registerUser);
-router.post(
-  "/login",
-  checkAuthenticated,
-  passport.authenticate("local", {
-    successMessage: true,
-    failureMessage: true,
-  }),
-  loginUser
-);
-router.delete("/signout", logoutUser);
+  router.post("/signup", registerUser);
+  router.post(
+    "/login",
+    checkAuthenticated,
+    passport.authenticate("local", {
+      successMessage: true,
+      failureMessage: true,
+    }),
+    loginUser
+  );
+  router.delete("/signout", logoutUser);
 
 export { router };

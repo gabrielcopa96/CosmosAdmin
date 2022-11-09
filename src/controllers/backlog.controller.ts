@@ -1,69 +1,77 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+
+import {
+  createBacklog,
+  getBacklogByOwner,
+  allsBacklogsByOwner,
+} from "../services/backlog.service";
 
 const postBacklog = async ({ body }: Request, res: Response) => {
+  try {
+    
+    const backlog = await createBacklog(body);
 
-    try {
-        
+    res.status(201).json({
+      ok: true,
+      msg: "Backlog creado correctamente",
+      data: backlog,
+    });
 
-    } catch (error) {
-        
-        res.status(500).json({
-            ok: false,
-            msg: 'Hubo un error volvelo a intentar'
-        })
+  } catch (error) {
+    
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+    });
 
-    }
-
-}
+  }
+};
 
 const getOneBacklogByOwner = async ({ params }: Request, res: Response) => {
+  try {
 
-    try {
-        
-        const { id, owner } = params
+    const { id, owner } = params;
 
-    } catch (error) {
-        
-        res.status(500).json({
-            ok: false,
-            msg: 'Hubo un error volvelo a intentar'
-        })
+    const backlog = await getBacklogByOwner(id, owner);
 
-    }
-}
+    return res.status(404).json({
+      ok: false,
+      msg: "Backlog no encontrado",
+      data: backlog
+    });
+
+  } catch (error) {
+
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+    });
+
+  }
+};
 
 const getAllBacklogsByOwner = async ({ params }: Request, res: Response) => {
+  try {
+    
+    const { owner } = params;
 
-    try {
+    const backlogs = await allsBacklogsByOwner(owner);
 
-        const { id, owner } = params
-
-        
-    } catch (error) {
-        
-        res.status(500).json({
-            ok: false,
-            msg: 'Hubo un error volvelo a intentar'
-        })
-
-    }
-}  
-
-// const filterUserByBacklog = async ({ params, query }: Request, res: Response) => {
-
-//     try {
-        
-//         const { id } = params
+    return res.status(404).json({
+        ok: false,
+        msg: "Backlogs no encontrados",
+        data: backlogs
+    });
 
 
-//     } catch (error) {
-        
-//         res.status(500).json({
-//             ok: false,
-//             msg: 'Hubo un error volvelo a intentar'
-//         })
+  } catch (error) {
+    
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+    });
 
-//     }
-// }
+  }
+};
 
-export { postBacklog, getOneBacklogByOwner, getAllBacklogsByOwner }
+export { postBacklog, getOneBacklogByOwner, getAllBacklogsByOwner };

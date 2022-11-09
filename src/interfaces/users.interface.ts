@@ -9,3 +9,13 @@ export interface UsersModel {
   image: string;
   projects: ObjectId[];
 }
+
+export interface UsersModelOutPut extends UsersModel {
+  _id: ObjectId;
+}
+
+export interface OutPutResponseRegister {
+  ok: boolean;
+  msg: string;
+  data: UsersModelOutPut;
+}

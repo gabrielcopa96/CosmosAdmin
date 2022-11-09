@@ -35,6 +35,10 @@ const userSchema = new Schema<UsersModel>(
       type: String,
       required: [true, "password is required"],
       trim: true,
+      validate: {
+        validator: (password: string) => regPassword.test(password),
+        message: (props) => `${props.value} is not valid password`,
+      }
     },
     image: {
       type: String,

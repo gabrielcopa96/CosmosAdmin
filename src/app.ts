@@ -15,7 +15,6 @@ import { router } from './routes';
 
 const app = express();
 
-
 // MIDDLEWARES
 // middleware para logs de request
 app.use(morgan('dev'));
@@ -31,7 +30,6 @@ app.use(session({
     secret: process.env.SECRET as string,
     resave: false,
     saveUninitialized: false
-    // cookie: { secure: true }
 }))
 
 app.use(passport.initialize());

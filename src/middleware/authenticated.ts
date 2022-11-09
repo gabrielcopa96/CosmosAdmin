@@ -6,7 +6,7 @@ const checkAuthenticated = (req: Request, res: Response, next: NextFunction) => 
     if(req.isAuthenticated() === true){
         
         // here you should make a redirect, for the main screen
-        return res.json({
+        return res.status(401).json({
             msg: 'You are already authenticated'
         })
 
@@ -16,4 +16,16 @@ const checkAuthenticated = (req: Request, res: Response, next: NextFunction) => 
 
 }
 
-export { checkAuthenticated }
+const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+    
+        if(req.isAuthenticated() === true){
+            return next();
+        }
+    
+        return res.status(401).json({
+            msg: 'You are not authenticated'
+        })
+    
+}
+
+export { checkAuthenticated, isAuthenticated }

@@ -7,3 +7,7 @@ export interface BacklogsModel {
     created_at: Date;
     owner: ObjectId;
 }
+
+export interface BacklogsModeloInput extends BacklogsModel {
+    id_project?: ObjectId | string;
+}
