@@ -34,9 +34,9 @@ const getOneBacklogByOwner = async ({ params }: Request, res: Response) => {
 
     const backlog = await getBacklogByOwner(id, owner);
 
-    return res.status(404).json({
+    return res.status(200).json({
       ok: false,
-      msg: "Backlog no encontrado",
+      msg: "Backlog encontrado",
       data: backlog
     });
 

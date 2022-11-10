@@ -1,13 +1,18 @@
 import BacklogModel from "../models/backlog.schema"
-import { BacklogsModeloInput } from '../interfaces/backlog.interface';
+import { BacklogsModel } from '../interfaces/backlog.interface';
 import ProjectModel from "../models/project.schema";
 
-const createBacklog = async (body: BacklogsModeloInput) => {
+const createBacklog = async (body: BacklogsModel) => {
 
         const newBacklog = new BacklogModel(body);
         
         await newBacklog.save();
-        
+
+        await ProjectModel.findOneAndUpdate({ owner: body.owner }, {
+            $push: {
+                backlogs: newBacklog._id
+            }
+        }, { new: true })
         
         return newBacklog;
 
