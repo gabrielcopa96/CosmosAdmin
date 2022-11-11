@@ -6,7 +6,7 @@ export interface TasksModel {
   comments: ObjectId[];
   pm: ObjectId;
   status: "unrealized" | "inprogress" | "completed";
-  users: ObjectId[];
+  members: ObjectId[];
   incidences: ObjectId[];
 }
 

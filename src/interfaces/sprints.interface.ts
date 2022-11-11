@@ -2,6 +2,7 @@ import { ObjectId } from "mongoose";
 
 export interface SprintsModel {
     name: string;
+    description?: string;
     tasks: ObjectId[];
     status: 'active' | 'completed' | 'standby',
     created_at: Date;

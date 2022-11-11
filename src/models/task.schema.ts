@@ -34,7 +34,7 @@ const taskSchema = new Schema<TasksModel>(
       default: "unrealized",
       required: [true, "status is required"],
     },
-    users: {
+    members: {
       type: [Types.ObjectId],
       ref: "User",
       required: [true, "users is required"],

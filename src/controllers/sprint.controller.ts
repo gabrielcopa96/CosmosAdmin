@@ -1,56 +1,91 @@
-import { Request, Response } from 'express';
+import { Request, Response } from "express";
+import {
+  createSprint,
+  getOneSprint,
+  updateSprint,
+  deleteOneSprint,
+} from "../services/sprint.service";
 
-const postSprint = ({ body }: Request, res: Response ) => {
+const postSprint = ({ body }: Request, res: Response) => {
+  try {
 
-    try {
+    const sprint = createSprint(body);
 
-    } catch (error) {
-        
-    }
-}
+    return res.status(200).json({
+      ok: true,
+      sprint,
+    });
 
-const getSprint = ({ params }: Request, res: Response ) => {
+  } catch (error: any) {
 
-    try {
-        
-        const { id } = params;
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+      error: error.message,
+    });
 
-    } catch (error) {
-        
-    }
-}
+  }
+};
 
-const putSprint = ({ body, params }: Request, res: Response ) => {
+const getSprint = ({ params }: Request, res: Response) => {
+  try {
+    const { id } = params;
 
-    try {
-        
-        const { id } = params;
+    const sprint = getOneSprint(id);
 
-    } catch (error) {
-        
-    }
-}
+    return res.status(200).json({
+        ok: true,
+        sprint
+    });
 
-const deleteSprint = ({ params }: Request, res: Response ) => {
+  } catch (error: any) {
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+      error: error.message,
+    });
+  }
+};
 
-    try {
-        
-        const { id } = params;
+const putSprint = ({ body, params }: Request, res: Response) => {
+  try {
 
-    } catch (error) {
-        
-    }
-}
+    const { id } = params;
 
-const getSprintsByUser = ({ params }: Request, res: Response ) => {
+    const sprint = updateSprint(id, body);
 
-    try {
-        
-        const { id } = params;
+    return res.status(200).json({
+        ok: true,
+        sprint
+    });
 
-    } catch (error) {
-        
-    }
-}
+  } catch (error: any) {
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+      error: error.message,
+    });
+  }
+};
 
-export { postSprint, getSprint, putSprint, deleteSprint, getSprintsByUser }
+const deleteSprint = ({ params }: Request, res: Response) => {
+  try {
+    const { id } = params;
+
+    const sprint = deleteOneSprint(id);
+
+    return res.status(200).json({
+        ok: true,
+        sprint
+    });
+
+  } catch (error: any) {
+    res.status(500).json({
+      ok: false,
+      msg: "Hubo un error volvelo a intentar",
+      error: error.message,
+    });
+  }
+};
+
+export { postSprint, getSprint, putSprint, deleteSprint };

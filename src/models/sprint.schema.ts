@@ -9,6 +9,10 @@ const sprintSchema = new Schema<SprintsModel>(
       required: [true, "name is required"],
       trim: true,
     },
+    description: {
+      type: String,
+      trim: true,
+    },
     tasks: {
       type: [Types.ObjectId],
       ref: "Task",
