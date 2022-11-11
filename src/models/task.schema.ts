@@ -10,6 +10,10 @@ const taskSchema = new Schema<TasksModel>(
       required: [true, "name is required"],
       trim: true,
     },
+    description: {
+      type: String,
+      trim: true,
+    },
     priority: {
       type: String,
       enum: ["low", "medium", "high"],
@@ -17,11 +21,12 @@ const taskSchema = new Schema<TasksModel>(
         true,
         "priority is required, can be only low, medium and high",
       ],
-      default: "low",
+      default: "medium",
     },
     comments: {
       type: [Types.ObjectId],
       ref: "Comment",
+      default: [],
     },
     pm: {
       type: Types.ObjectId,
@@ -39,10 +44,11 @@ const taskSchema = new Schema<TasksModel>(
       ref: "User",
       required: [true, "users is required"],
     },
-    incidences: {
-      type: [Types.ObjectId],
-      ref: "Incidence",
-    },
+    backlog: {
+      type: Types.ObjectId,
+      ref: "Backlog",
+      required: [true, "backlog is required"],
+    }
   },
   {
     versionKey: false,

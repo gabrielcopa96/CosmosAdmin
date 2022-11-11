@@ -2,12 +2,13 @@ import { ObjectId } from "mongoose";
 
 export interface TasksModel {
   name: string;
+  description: string;
   priority: "low" | "medium" | "high";
   comments: ObjectId[];
   pm: ObjectId;
   status: "unrealized" | "inprogress" | "completed";
   members: ObjectId[];
-  incidences: ObjectId[];
+  backlog: ObjectId;
 }
 
 // pm -> project manager
