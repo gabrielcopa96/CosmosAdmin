@@ -8,6 +8,7 @@ export interface TasksModel {
   pm: ObjectId;
   status: "unrealized" | "inprogress" | "completed";
   members: ObjectId[];
+  subtasks: ObjectId[];
   backlog: ObjectId;
 }
 

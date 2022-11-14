@@ -14,7 +14,7 @@ const incidenceSchema = new Schema<IncidencesModel>(
       required: [true, "description is required"],
       trim: true,
       maxlength: [500, "description max length is 500 characters"],
-      minlength: [10, "description min length is 10 characters"],
+      minlength: [6, "description min length is 6 characters"],
     },
     status: {
       type: String,
@@ -22,13 +22,15 @@ const incidenceSchema = new Schema<IncidencesModel>(
       default: "open",
       required: [true, "status is required"],
     },
+    task: {
+      type: Types.ObjectId,
+      ref: "Task",
+      required: [true, "task is required"],
+    },
     user: {
         type: Types.ObjectId,
         ref: "User",
         required: [true, "user is required"],
-    },
-    time: {
-        type: Number,
     }
   },
   {

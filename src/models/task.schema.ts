@@ -44,6 +44,11 @@ const taskSchema = new Schema<TasksModel>(
       ref: "User",
       required: [true, "users is required"],
     },
+    subtasks: {
+      type: [Types.ObjectId],
+      ref: "SubTask",
+      default: [],
+    },
     backlog: {
       type: Types.ObjectId,
       ref: "Backlog",

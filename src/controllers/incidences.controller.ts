@@ -4,6 +4,7 @@ const postIncidences = async ({ body }: Request, res: Response) => {
 
     try {
         
+        
 
     } catch (error) {
         
