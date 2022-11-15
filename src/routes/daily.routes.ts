@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { postDaily, getDailyBySprint, getDailyById } from '../controllers/daily.controller';
+import { postDaily, getDailyBySprint, getDailyById, putDaily, deleteDaily }from '../controllers/daily.controller';
 
 import { isAuthenticated } from '../middleware/authenticated';
 
@@ -10,5 +10,7 @@ const router = Router();
         .post('/', isAuthenticated ,postDaily)
         .get('/sprint/:id', isAuthenticated ,getDailyBySprint)
         .get('/:id', isAuthenticated ,getDailyById)
+        .put('/:id', isAuthenticated ,putDaily)
+        .delete('/:id', isAuthenticated ,deleteDaily);
 
 export { router }

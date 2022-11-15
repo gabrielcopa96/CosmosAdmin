@@ -1,11 +1,23 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import { postSubtask, getSubtaskByTask, assignSubTaskUser } from '../controllers/subtask.controller';
+import {
+  postSubtask,
+  getAllSubtasks,
+  getSubtaskById,
+  getSubtaskByTask,
+  putSubtask,
+  deleteSubtask,
+} from "../controllers/subtask.controller";
+
+import { isAuthenticated } from "../middleware/authenticated";
 
 const router = Router();
 
-    router.post('/', postSubtask);
-    router.get('/:id', getSubtaskByTask);
-    router.put('/:id', assignSubTaskUser);
+router.post("/", isAuthenticated, postSubtask);
+router.get("/task/:id", isAuthenticated, getSubtaskByTask);
+router.get("/", isAuthenticated, getAllSubtasks);
+router.get("/:id", isAuthenticated, getSubtaskById);
+router.put("/:id", isAuthenticated, putSubtask);
+router.delete("/:id", isAuthenticated, deleteSubtask);
 
 export { router };
