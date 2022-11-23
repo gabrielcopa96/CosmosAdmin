@@ -8,6 +8,7 @@ export interface UsersModel {
   password: string;
   image: string;
   projects: ObjectId[];
+  refreshToken: any;
 }
 
 export interface UsersModelOutPut extends UsersModel {

@@ -6,6 +6,8 @@ import session from 'express-session';
 
 import passport from 'passport';
 
+import cookieParser from 'cookie-parser';
+
 import cors from 'cors';
 import morgan from 'morgan';
 
@@ -21,7 +23,11 @@ app.use(morgan('dev'));
 
 // middleware para las cors, por defecto el origin -> *
 // los methods -> POST-GET-PUT-PATCH-DELETE
-app.use(cors());
+app.use(cors({
+    credentials: true,
+}));
+
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // middleware para poder recibir datos en formato json
 app.use(express.json());

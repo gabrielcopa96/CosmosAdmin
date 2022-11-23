@@ -6,6 +6,6 @@ import { isAuthenticated } from '../middleware/authenticated';
 
 const router = Router();
 
-        router.get('/:id', isAuthenticated ,getUserById);
+        router.get('/:email', getUserById);
 
 export { router }; 

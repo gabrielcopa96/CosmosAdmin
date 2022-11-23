@@ -4,6 +4,10 @@ import { signup } from "../services/auth.service";
 
 import { OutPutResponseRegister } from '../interfaces/users.interface';
 
+import { generateToken, verifyToken } from "../utils/jwt";
+
+
+
 interface Error {
   ok: boolean;
   msg: string;
@@ -30,14 +34,21 @@ const registerUser = async ({ body }: Request, res: Response): Promise<any | Err
 const loginUser = (req: Request, res: Response) => {
   try {
 
-    const user = req.user
+    const user = req.user;
+
+    const token = generateToken(user);
+
+    // res.cookie("token", token)
+
+    console.log(req.session);
 
     res.status(200).json({
-      ok: true,
+      isAuth: true,
       msg: "User logueado correctamente",
-      userAuth: user
+      userAuth: user,
+      token,
     });
-    
+
   } catch (error) {
     res.status(500).json({
       ok: false,
@@ -48,6 +59,8 @@ const loginUser = (req: Request, res: Response) => {
 
 const logoutUser = (req: Request, res: Response, next: NextFunction) => {
   try {
+
+    res.clearCookie("token");
 
     req.logout(function (err) {
       if (err) {

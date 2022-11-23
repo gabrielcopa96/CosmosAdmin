@@ -2,6 +2,7 @@ import { UsersModel } from "../interfaces/users.interface";
 import UserModel from "../models/user.schema";
 
 import { encrypt } from "../utils/hashPassword.utils";
+import { verifyToken } from "../utils/jwt";
 
 const signup = async (user: UsersModel) => {
     
@@ -23,4 +24,12 @@ const signup = async (user: UsersModel) => {
 
 }
 
-export { signup }
+const isVerifiedTokenUser = (token: string) => {
+      
+      const isVerified = verifyToken(token);
+  
+      return isVerified;
+  
+}
+
+export { signup, isVerifiedTokenUser }

@@ -7,6 +7,7 @@ const checkAuthenticated = (req: Request, res: Response, next: NextFunction) => 
         
         // here you should make a redirect, for the main screen
         return res.status(401).json({
+            isAuth: true,
             msg: 'You are already authenticated'
         })
 

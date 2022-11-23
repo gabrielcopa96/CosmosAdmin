@@ -9,7 +9,7 @@ import {
 } from "../controllers/auth.controller";
 
 import { checkAuthenticated } from "../middleware/authenticated";
-
+import { isVerifiedToken } from "../middleware/isVerifiedToken";
 const router = Router();
 
   router.post("/signup", registerUser);
@@ -22,6 +22,12 @@ const router = Router();
     }),
     loginUser
   );
+  router.get('/prueba', isVerifiedToken, (req, res) => {
+    res.json({
+      ok: true,
+      msg: "Prueba"
+    })
+  })
   router.delete("/signout", logoutUser);
 
 export { router };

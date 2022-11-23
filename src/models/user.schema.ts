@@ -3,6 +3,20 @@ import { Schema, Types, model } from "mongoose";
 import { UsersModel } from "../interfaces/users.interface";
 import { regEmail, regPassword } from "../utils/validator.utils";
 
+import passportLocalMongoose from "passport-local-mongoose"
+
+const SessionSchema = new Schema(
+  {
+    refreshToken: {
+      type: String,
+      default: ""
+    }
+  },
+  {
+    versionKey: false,
+  }
+)
+
 const userSchema = new Schema<UsersModel>(
   {
     firstName: {
@@ -47,12 +61,24 @@ const userSchema = new Schema<UsersModel>(
     projects: {
         type: [Types.ObjectId],
         default: [],
+    },
+    refreshToken: {
+      type: [SessionSchema],
     }
   },
   {
     versionKey: false,
   }
 );
+
+userSchema.set("toJSON", {
+  transform: (doc, ret) => {
+    delete ret.refreshToken;
+    return ret;
+  }
+})
+
+userSchema.plugin(passportLocalMongoose)
 
 const UserModel = model('User', userSchema);
 export default UserModel;
