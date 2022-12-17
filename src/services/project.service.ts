@@ -4,10 +4,10 @@ import ProjectModel from "../models/project.schema";
 
 const createProject = async (body: ProjectsModel) => {
 
-    const project = ProjectModel.create(body);
+    const project = await ProjectModel.create(body);
 
     if(!project) {
-        return `No se pudo crear el project`;
+        throw new Error(`No se pudo crear el proyecto`);
     }
 
     return project;

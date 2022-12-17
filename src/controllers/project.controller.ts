@@ -14,11 +14,8 @@ const postProject = async ({ body }: Request, res: Response) => {
         })
         
     } catch (error: any) {
-        console.log('error', error);
-        res.status(500).json({
-            msg: 'Este es mi error',
-            error: error.message
-        })
+
+        res.status(500).json(error)
     }
 }
 

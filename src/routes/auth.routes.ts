@@ -22,12 +22,6 @@ const router = Router();
     }),
     loginUser
   );
-  router.get('/prueba', isVerifiedToken, (req, res) => {
-    res.json({
-      ok: true,
-      msg: "Prueba"
-    })
-  })
   router.delete("/signout", logoutUser);
 
 export { router };
