@@ -12,10 +12,10 @@ const PORT = `${process.env.PORT}`;
 // por medio de la conexion en caso de que se resuelva 
 // la conexion a la base de datos, muestro en consola
 // que tanto el servidor como la base de datos, estan conectadas
-// connection.then(() => {
+connection.then(() => {
     // console.log('connection to database established')
     app.listen(PORT, () => {
         console.log(`Servidor listo en el puerto ${PORT}`)
     })
-// })
+})
 

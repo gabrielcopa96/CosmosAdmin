@@ -67,14 +67,14 @@ const userSchema = new Schema<UsersModel>(
   }
 );
 
-userSchema.set("toJSON", {
-  transform: (doc, ret) => {
-    delete ret.refreshToken;
-    return ret;
-  }
-})
+// userSchema.set("toJSON", {
+//   transform: (doc, ret) => {
+//     delete ret.refreshToken;
+//     return ret;
+//   }
+// })
 
-userSchema.plugin(passportLocalMongoose)
+// userSchema.plugin(passportLocalMongoose)
 
 const UserModel = model('User', userSchema);
 export default UserModel;
