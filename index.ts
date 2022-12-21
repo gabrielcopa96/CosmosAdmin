@@ -7,7 +7,7 @@ import { connection } from './src/config/db';
 // almaceno la variable de entorno del puerto 
 // y le digo que es un string para que luego
 // typescript no me tire error
-const PORT = `${process.env.PORT}`;
+const PORT = process.env.PORT as string;
 
 // por medio de la conexion en caso de que se resuelva 
 // la conexion a la base de datos, muestro en consola
