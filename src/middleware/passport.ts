@@ -21,8 +21,6 @@ passport.deserializeUser((id, cb) => {
     .catch((err) => cb(err));
 });
 
-// passport.use(new Strategy(UserModel.authenticate()));
-
 passport.use(
   new Strategy(
     {
